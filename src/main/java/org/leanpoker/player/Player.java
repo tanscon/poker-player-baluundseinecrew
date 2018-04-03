@@ -61,6 +61,7 @@ public class Player {
     			chenValue += h.checkPair(gs.community_cards[1].rank);
     			chenValue += h.checkPair(gs.community_cards[2].rank);
     			chenValue += h.checkFlush(gs.community_cards);
+    			chenValue += h.checkPair(gs.community_cards);
         		if (chenValue >= 9 && chenValue <= 14){
         			bet = gs.current_buy_in;
         		}else if (chenValue >= 14){
@@ -79,6 +80,7 @@ public class Player {
     			chenValue += h.checkPair(gs.community_cards[2].rank);
     			chenValue += h.checkPair(gs.community_cards[3].rank);
     			chenValue += h.checkFlush(gs.community_cards);
+    			chenValue += h.checkPair(gs.community_cards);
         		if (chenValue >= 9 && chenValue <= 14){
         			bet = gs.current_buy_in;
         		}else if (chenValue >= 14 && chenValue < 20){
@@ -100,6 +102,7 @@ public class Player {
     			chenValue += h.checkPair(gs.community_cards[3].rank);
     			chenValue += h.checkPair(gs.community_cards[4].rank);
     			chenValue += h.checkFlush(gs.community_cards);
+    			chenValue += h.checkPair(gs.community_cards);
         		if (chenValue >= 9 && chenValue <= 14){
         			bet = gs.current_buy_in;
         		}else if (chenValue >= 14 && chenValue < 20){
@@ -326,6 +329,36 @@ return 6;
 		
 		if(oCo >= 5)return 20;
 		else if(tCo >= 5)return 20;
+		else return 0;
+	}
+	
+	public int checkStraight(CardObj[] cc) {
+		int lowest;
+		if(numb1 < numb2)lowest = numb1;
+		else lowest = numb2;
+		
+		for(int i = 0; i < cc.length; i++) {
+			if(setIntValue(cc[i].rank) < lowest) {
+				lowest = setIntValue(cc[i].rank);
+			}
+		}
+		
+		count  = 1;
+		for(int o = 0; o <  8; o++) {
+			for(int i = 0; i < cc.length; i++) {
+				if(cc[i] == lowest+1) {
+					count ++;
+					lowest ++;
+				}
+				
+				if(lowest +1 == numb1 || lowest +1 == numb2) {
+					count++;
+					lowest ++;
+				}
+			}
+		}
+		
+		if(count >= 5)return 20;
 		else return 0;
 	}
 
