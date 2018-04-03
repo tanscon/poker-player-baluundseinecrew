@@ -32,7 +32,7 @@ public class Player {
     		
     		chenValue = calcHand(p.hole_cards[0].rank, p.hole_cards[0].suit, p.hole_cards[1].rank, p.hole_cards[1].suit);
     		
-    		if (chenValue >= 8 && <= 10){
+    		if (chenValue >= 8 && chenValue <= 10){
     			bet = gs.current_buy_in;
     		}else if (chenValue >= 10){
     			bet = gs.current_buy_in + (p.stack/10);
