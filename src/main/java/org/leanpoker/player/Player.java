@@ -42,8 +42,12 @@ public class Player {
         		}else if (chenValue >= 10 && !raised){
         			bet = gs.current_buy_in + (p.stack/10);
         			raised = true;
+        		}else if (chenValue >= 10){
+        			bet = gs.current_buy_in;
         		}
     		}else if (gs.community_cards.length == 3){
+    			
+    			raised = false;
     		
     			chenValue += h.checkPair(gs.community_cards[0].rank);
     			chenValue += h.checkPair(gs.community_cards[1].rank);
