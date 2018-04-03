@@ -49,6 +49,10 @@ public class Player {
         		if(gs.current_buy_in >= p.stack && p.stack > 200 && chenValue < 15) {
         			bet = 0;
         		}
+        		if(activePlayer(gs) >= 2 && chenValue < 14) {
+        			bet = 0;
+        		}
+        		
     		}else if (gs.community_cards.length == 3){
     			
     			raised = false;
@@ -56,11 +60,14 @@ public class Player {
     			chenValue += h.checkPair(gs.community_cards[0].rank);
     			chenValue += h.checkPair(gs.community_cards[1].rank);
     			chenValue += h.checkPair(gs.community_cards[2].rank);
-    			
+    			chen Value += h.checkFlush(gs.community_cards);
         		if (chenValue >= 9 && chenValue <= 14){
         			bet = gs.current_buy_in;
         		}else if (chenValue >= 14){
         			bet = gs.current_buy_in + (p.stack/10);
+        		}
+        		if(activePlayer(gs) >= 2 && chenValue < 20) {
+        			bet = 0;
         		}
         		
     		}else if (gs.community_cards.length == 4){
@@ -71,13 +78,16 @@ public class Player {
     			chenValue += h.checkPair(gs.community_cards[1].rank);
     			chenValue += h.checkPair(gs.community_cards[2].rank);
     			chenValue += h.checkPair(gs.community_cards[3].rank);
-    			
+    			chen Value += h.checkFlush(gs.community_cards);
         		if (chenValue >= 9 && chenValue <= 14){
         			bet = gs.current_buy_in;
         		}else if (chenValue >= 14 && chenValue < 20){
         			bet = gs.current_buy_in + (p.stack/10);
         		}else if(chenValue >= 20) {
         			bet = p.stack;
+        		}
+        		if(activePlayer(gs) >= 2 && chenValue < 20) {
+        			bet = 0;
         		}
         		
     		}else if (gs.community_cards.length == 5){
@@ -89,13 +99,16 @@ public class Player {
     			chenValue += h.checkPair(gs.community_cards[2].rank);
     			chenValue += h.checkPair(gs.community_cards[3].rank);
     			chenValue += h.checkPair(gs.community_cards[4].rank);
-    			
+    			chen Value += h.checkFlush(gs.community_cards);
         		if (chenValue >= 9 && chenValue <= 14){
         			bet = gs.current_buy_in;
         		}else if (chenValue >= 14 && chenValue < 20){
         			bet = gs.current_buy_in + (p.stack/10);
         		}else if(chenValue >= 20) {
         			bet = p.stack;
+        		}
+        		if(activePlayer(gs) >= 2 && chenValue < 20) {
+        			bet = 0;
         		}
         		
     		}else {
@@ -109,6 +122,15 @@ public class Player {
     public static void showdown(JsonElement game) {
     }
 
+    int activePlayer(GameState gs) {
+    	int count = 0;
+    	for(int i = 0; i < gs.players.length; i++) {
+    		if(gs.players[i].status.equals("out")) {
+    			count++;
+    		}
+    	}
+    	return gs.players.length - out;
+    }
   
 }
 
@@ -293,7 +315,19 @@ return 6;
 	
 	}
 	
-
+	public int checkFlush(CardObj[] cc) {
+		int oCo = 1;
+		int tCo = 2;
+		
+		for(int i = 0; i < cc.length; i++) {
+			if(cc[i].suit == c1)oCo ++;
+			if(cc[i].suit == c2)tCo ++;
+		}
+		
+		if(oCo >= 5)return 20;
+		else if(tCo >= 5)return 20;
+		else return 0;
+	}
 
 }
 	
