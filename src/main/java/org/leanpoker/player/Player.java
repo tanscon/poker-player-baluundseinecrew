@@ -51,33 +51,6 @@ public class Player {
         			bet = gs.current_buy_in + (p.stack/10);
         		}
         		
-    		}else if (gs.round == 2){
-    		/*	
-    			chenValue += h.checkPair(gs.community_cards[0].rank);
-    			chenValue += h.checkPair(gs.community_cards[1].rank);
-    			chenValue += h.checkPair(gs.community_cards[2].rank);
-    			chenValue += h.checkPair(gs.community_cards[4].rank);
-    			
-        		if (chenValue >= 9 && chenValue <= 14){
-        			bet = gs.current_buy_in;
-        		}else if (chenValue >= 14){
-        			bet = gs.current_buy_in + (p.stack/10);
-        		}
-        		*/
-    		}else if (gs.round == 3){
-    	/*		
-    			chenValue += h.checkPair(gs.community_cards[0].rank);
-    			chenValue += h.checkPair(gs.community_cards[1].rank);
-    			chenValue += h.checkPair(gs.community_cards[2].rank);
-    			chenValue += h.checkPair(gs.community_cards[3].rank);
-    			chenValue += h.checkPair(gs.community_cards[4].rank);
-    			
-        		if (chenValue >= 9 && chenValue <= 14){
-        			bet = gs.current_buy_in;
-        		}else if (chenValue >= 14){
-        			bet = gs.current_buy_in + (p.stack/10);
-        		}
-        		*/
     		}else {
     			bet = gs.current_buy_in;
     		}
