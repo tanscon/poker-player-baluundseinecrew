@@ -33,11 +33,15 @@ public class Player {
     		System.err.println("Round:");
     		System.err.println(gs.round);
     	//	System.err.println(chenValue);
+    		
+    		boolean raised = false; 
+    		
     		if(gs.community_cards.length == 0) {
         		if (chenValue >= 6 && chenValue <= 10){
         			bet = gs.current_buy_in;
-        		}else if (chenValue >= 10){
+        		}else if (chenValue >= 10 && !raised){
         			bet = gs.current_buy_in + (p.stack/10);
+        			raised = true;
         		}
     		}else if (gs.community_cards.length == 3){
     		
@@ -166,7 +170,7 @@ class Hand {
 		
 		float value = calcPair(n1, n2);
 		if(isSuited(c1, c2))value += 2;
-		value -= gap(n1,n2) * 0.25;
+		value -= Math.abs(gap(n1,n2)) * 0.25;
 		
 		return Math.round(value);
 		
