@@ -26,11 +26,10 @@ public class Player {
     		}
     		
     		
-    		
+    		Hand h = new Hand(p.hole_cards[0].rank, p.hole_cards[0].suit, p.hole_cards[1].rank, p.hole_cards[1].suit);
     		
     		int chenValue;
-    		
-    		chenValue = calcHand(p.hole_cards[0].rank, p.hole_cards[0].suit, p.hole_cards[1].rank, p.hole_cards[1].suit);
+    		chenValue = h.getValue();
     		
     		if (chenValue >= 8 && chenValue <= 10){
     			bet = gs.current_buy_in;
@@ -44,85 +43,12 @@ public class Player {
     
     public static void showdown(JsonElement game) {
     }
-    
-    
-    public static int calcHand(String n1, String c1, String n2, String c2) {
-		
-		
-		
-		
-		float value = calcPair(n1, n2);
-		if(isSuited(c1, c2))value += 2;
-		value -= gap(n1,n2);
-		
-		return Math.round(value);
-		
-	
-	
-    }
 
-    public static float getValue(String n1) {
-	
-	
-	switch (n1) {
-	case "A": 
-		return 10;
-	
-	case "K": 
-	return 8;
-	case "Q": 
-	return 7;
-	case "J": 
-	return 6;
-	default:
-		return Integer.parseInt(n1) / 2;
+  
 }
-}	
-    public static boolean isPair(String n1, String n2) {
-		if(n1.equals(n2))return true;
-		else return false;
-	}
-	
-    public static float calcPair(String n1, String n2) {
-		if(isPair(n1,n2)) {
-			return getValue(n1) *2;
-		}else return getValue(n1);
-	}
-	
-    public static boolean isSuited(String c1, String c2) {
-		if(c1.equals(c2))return true;
-		else return false;
-	}
-	
-    public static int gap(String n1, String n2) {
-		
-		if(n1.equalsIgnoreCase("A")) {
-		 n1 = "14"	;
-		}else if(n1.equalsIgnoreCase("K")) {
-			n1 = "13";
-		}else if(n1.equalsIgnoreCase("Q")) {
-			n1 = "12";
-		}else if(n1.equalsIgnoreCase("J")) {
-			n1 ="11";
-		}
-		
-		if(n2.equalsIgnoreCase("A")) {
-			 n2 = "14"	;
-			}else if(n2.equalsIgnoreCase("K")) {
-				n2 = "13";
-			}else if(n2.equalsIgnoreCase("Q")) {
-				n2 = "12";
-			}else if(n2.equalsIgnoreCase("J")) {
-				n2 ="11";
-			}
-		
-	
-	return Math.abs(Integer.parseInt(n1) - Integer.parseInt(n2));
-		
-	}
-    
-    
-}
+
+
+
 
 class GameState {
 	public String tournament_id;
@@ -173,11 +99,128 @@ class CardObj {
 	
 	
 
+public class Hand {
+
+	String n1, n2, c1, c2;
+	int numb1, numb2;
+	int value;
+	
+	public Hand(String n1, String c1, String n2, String c2) {
+		this.n1 = n1;
+		this.n2 = n2;
+		this.c1 = c1;
+		this.c2 = c2;
+		
+		numb1 = setIntValue(n1);
+		numb2 = setIntValue(n2);
+		
+		if(numb1 >= numb2)value = calcHand(n1,c1,n2,c2);
+		else value = calcHand(n2,c2,n1,c1);
+		
+
+	}
+	
+	public int getValue() {
+		return value;
+	}
+	
+	
+	int setIntValue(String n1){
+		switch(n1) {
+		case "A":
+			return 14;
+		case "K":
+			return 13;
+		case "Q":
+			return 12;
+		case "J":
+			return 11;
+		default:
+			return Integer.parseInt(n1);
+		}
+	}
+	
+	int calcHand(String n1, String c1, String n2, String c2) {
+		
+		
+		
+		
+		float value = calcPair(n1, n2);
+		if(isSuited(c1, c2))value += 2;
+		value -= gap(n1,n2) * 0.25;
+		
+		return Math.round(value);
+		
+	
+	
+}
 	
 	
 	
+
+float getValue(String number) {
 	
 	
+	switch (number) {
+	case "A": 
+		return 10;
+	
+	case "K": 
+	return 8;
+	case "Q": 
+	return 7;
+	case "J": 
+return 6;
+	default:
+		return Integer.parseInt(number) / 2;
+}
+}	
+	boolean isPair(String n1, String n2) {
+		if(n1.equals(n2))return true;
+		else return false;
+	}
+	
+	float calcPair(String n1, String n2) {
+		if(isPair(n1,n2)) {
+			return getValue(n1) *2;
+		}else return getValue(n1);
+	}
+	
+	boolean isSuited(String c1, String c2) {
+		if(c1.equals(c2))return true;
+		else return false;
+	}
+	
+	int gap(String n1, String n2) {
+		
+		if(n1.equalsIgnoreCase("A")) {
+		 n1 = "14"	;
+		}else if(n1.equalsIgnoreCase("K")) {
+			n1 = "13";
+		}else if(n1.equalsIgnoreCase("Q")) {
+			n1 = "12";
+		}else if(n1.equalsIgnoreCase("J")) {
+			n1 ="11";
+		}
+		
+		if(n2.equalsIgnoreCase("A")) {
+			 n2 = "14"	;
+			}else if(n2.equalsIgnoreCase("K")) {
+				n2 = "13";
+			}else if(n2.equalsIgnoreCase("Q")) {
+				n2 = "12";
+			}else if(n2.equalsIgnoreCase("J")) {
+				n2 ="11";
+			}
+		
+	
+	return Math.abs(Integer.parseInt(n1) - Integer.parseInt(n2));
+		
+	}
+
+	
+
+}
 	
 	
 	
