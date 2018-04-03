@@ -45,6 +45,10 @@ public class Player {
     		if(activePlayer(gs) <= 2)
     			chenValue *= (gs.small_blind/200 +1);
     		
+    		if(p.bet == gs.small_blind && activePlayer(gs) <= 2) {
+    			chenValue += 2;
+    		}
+    		
     		
     		if(gs.community_cards.length == 0) {
         		if (chenValue >= 8 && chenValue <= 10){
