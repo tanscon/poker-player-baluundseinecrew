@@ -60,7 +60,7 @@ public class Player {
     			chenValue += h.checkPair(gs.community_cards[0].rank);
     			chenValue += h.checkPair(gs.community_cards[1].rank);
     			chenValue += h.checkPair(gs.community_cards[2].rank);
-    			chen Value += h.checkFlush(gs.community_cards);
+    			chenValue += h.checkFlush(gs.community_cards);
         		if (chenValue >= 9 && chenValue <= 14){
         			bet = gs.current_buy_in;
         		}else if (chenValue >= 14){
@@ -78,7 +78,7 @@ public class Player {
     			chenValue += h.checkPair(gs.community_cards[1].rank);
     			chenValue += h.checkPair(gs.community_cards[2].rank);
     			chenValue += h.checkPair(gs.community_cards[3].rank);
-    			chen Value += h.checkFlush(gs.community_cards);
+    			chenValue += h.checkFlush(gs.community_cards);
         		if (chenValue >= 9 && chenValue <= 14){
         			bet = gs.current_buy_in;
         		}else if (chenValue >= 14 && chenValue < 20){
@@ -99,7 +99,7 @@ public class Player {
     			chenValue += h.checkPair(gs.community_cards[2].rank);
     			chenValue += h.checkPair(gs.community_cards[3].rank);
     			chenValue += h.checkPair(gs.community_cards[4].rank);
-    			chen Value += h.checkFlush(gs.community_cards);
+    			chenValue += h.checkFlush(gs.community_cards);
         		if (chenValue >= 9 && chenValue <= 14){
         			bet = gs.current_buy_in;
         		}else if (chenValue >= 14 && chenValue < 20){
