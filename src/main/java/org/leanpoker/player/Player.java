@@ -122,14 +122,14 @@ public class Player {
     public static void showdown(JsonElement game) {
     }
 
-    int activePlayer(GameState gs) {
+   public static int activePlayer(GameState gs) {
     	int count = 0;
     	for(int i = 0; i < gs.players.length; i++) {
     		if(gs.players[i].status.equals("out")) {
     			count++;
     		}
     	}
-    	return gs.players.length - out;
+    	return gs.players.length - count;
     }
   
 }
