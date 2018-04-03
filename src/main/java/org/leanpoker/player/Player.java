@@ -75,7 +75,7 @@ public class Player {
 	case "J": 
 	return 6;
 	default:
-		return Integer.parseInt(number) / 2;
+		return Integer.parseInt(n1) / 2;
 }
 }	
     public static boolean isPair(String n1, String n2) {
