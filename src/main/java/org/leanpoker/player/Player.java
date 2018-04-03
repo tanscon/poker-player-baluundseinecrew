@@ -14,6 +14,9 @@ public class Player {
     		Gson gson = new Gson();
     		GameState gs = gson.fromJson(request, GameState.class);
 
+    		System.err.println("New");
+    		
+    		
     		int bet = 0;
     		int mySelfID = gs.in_action;
     		
@@ -49,7 +52,7 @@ public class Player {
         		if(gs.current_buy_in >= p.stack && p.stack > 200 && chenValue < 15) {
         			bet = 0;
         		}
-        		if(activePlayer(gs) >= 2 && chenValue < 14) {
+        		if(activePlayer(gs) >= 2 && chenValue < 10) {
         			bet = 0;
         		}
         		
@@ -67,7 +70,7 @@ public class Player {
         		}else if (chenValue >= 14){
         			bet = gs.current_buy_in + (p.stack/10);
         		}
-        		if(activePlayer(gs) >= 2 && chenValue < 20) {
+        		if(activePlayer(gs) >= 2 && chenValue < 14) {
         			bet = 0;
         		}
         		
@@ -88,7 +91,7 @@ public class Player {
         		}else if(chenValue >= 20) {
         			bet = p.stack;
         		}
-        		if(activePlayer(gs) >= 2 && chenValue < 20) {
+        		if(activePlayer(gs) >= 2 && chenValue < 13) {
         			bet = 0;
         		}
         		
@@ -110,7 +113,7 @@ public class Player {
         		}else if(chenValue >= 20) {
         			bet = p.stack;
         		}
-        		if(activePlayer(gs) >= 2 && chenValue < 20) {
+        		if(activePlayer(gs) >= 2 && chenValue < 12) {
         			bet = 0;
         		}
         		
