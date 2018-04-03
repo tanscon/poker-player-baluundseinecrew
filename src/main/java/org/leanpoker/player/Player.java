@@ -293,9 +293,7 @@ return 6;
 	
 	}
 	
-	public int checkFlush() {
-		
-	}
+
 
 }
 	
