@@ -59,10 +59,44 @@ public class Player {
         			bet = gs.current_buy_in + (p.stack/10);
         		}
         		
+    		}else if (gs.community_cards.length == 4){
+    			
+    			raised = false;
+    		
+    			chenValue += h.checkPair(gs.community_cards[0].rank);
+    			chenValue += h.checkPair(gs.community_cards[1].rank);
+    			chenValue += h.checkPair(gs.community_cards[2].rank);
+    			chenValue += h.checkPair(gs.community_cards[3].rank);
+    			
+        		if (chenValue >= 9 && chenValue <= 14){
+        			bet = gs.current_buy_in;
+        		}else if (chenValue >= 14 && chenValue < 20){
+        			bet = gs.current_buy_in + (p.stack/10);
+        		}else if(chenValue >= 20) {
+        			bet = p.stack;
+        		}
+        		
+    		}else if (gs.community_cards.length == 5){
+    			
+    			raised = false;
+    		
+    			chenValue += h.checkPair(gs.community_cards[0].rank);
+    			chenValue += h.checkPair(gs.community_cards[1].rank);
+    			chenValue += h.checkPair(gs.community_cards[2].rank);
+    			chenValue += h.checkPair(gs.community_cards[3].rank);
+    			chenValue += h.checkPair(gs.community_cards[4].rank);
+    			
+        		if (chenValue >= 9 && chenValue <= 14){
+        			bet = gs.current_buy_in;
+        		}else if (chenValue >= 14 && chenValue < 20){
+        			bet = gs.current_buy_in + (p.stack/10);
+        		}else if(chenValue >= 20) {
+        			bet = p.stack;
+        		}
+        		
     		}else {
     			bet = gs.current_buy_in;
     		}
-
     		
         return bet;
     }
