@@ -10,7 +10,7 @@ public class Player {
 
     static final String VERSION = "PDPS3_01";
 	static boolean raised = false; 
-	static int raised = 0;
+
     public static int betRequest(JsonElement request) {
     		Gson gson = new Gson();
     		GameState gs = gson.fromJson(request, GameState.class);
@@ -41,6 +41,10 @@ public class Player {
     		int playValue = 10;
     		if(activePlayer(gs) <= 3)
     			playValue = 8;
+    		
+    		if(activePlayer(gs) <= 2)
+    			chenValue *= (gs.small_blind/200 +1);
+    		
     		
     		if(gs.community_cards.length == 0) {
         		if (chenValue >= 8 && chenValue <= 10){
