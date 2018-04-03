@@ -9,7 +9,7 @@ import java.util.Map;
 public class Player {
 
     static final String VERSION = "PDPS3_01";
-
+	static boolean raised = false; 
     public static int betRequest(JsonElement request) {
     		Gson gson = new Gson();
     		GameState gs = gson.fromJson(request, GameState.class);
@@ -30,11 +30,76 @@ public class Player {
     		
     		int chenValue;
     		chenValue = h.getValue();
-    		System.err.println(chenValue);
-    		if (chenValue >= 6 && chenValue <= 10){
+    		System.err.println("Round:");
+    		System.err.println(gs.round);
+    	//	System.err.println(chenValue);
+    		
+    
+    		
+    		if(gs.community_cards.length == 0) {
+        		if (chenValue >= 6 && chenValue <= 10){
+        			bet = gs.current_buy_in;
+        		}else if (chenValue >= 10 && !raised){
+        			bet = gs.current_buy_in + (p.stack/10);
+        			raised = true;
+        		}else if (chenValue >= 10){
+        			bet = gs.current_buy_in;
+        		}
+        		
+        		if(gs.current_buy_in >= p.stack && p.stack > 200 && chenValue < 15) {
+        			bet = 0;
+        		}
+    		}else if (gs.community_cards.length == 3){
+    			
+    			raised = false;
+    		
+    			chenValue += h.checkPair(gs.community_cards[0].rank);
+    			chenValue += h.checkPair(gs.community_cards[1].rank);
+    			chenValue += h.checkPair(gs.community_cards[2].rank);
+    			
+        		if (chenValue >= 9 && chenValue <= 14){
+        			bet = gs.current_buy_in;
+        		}else if (chenValue >= 14){
+        			bet = gs.current_buy_in + (p.stack/10);
+        		}
+        		
+    		}else if (gs.community_cards.length == 4){
+    			
+    			raised = false;
+    		
+    			chenValue += h.checkPair(gs.community_cards[0].rank);
+    			chenValue += h.checkPair(gs.community_cards[1].rank);
+    			chenValue += h.checkPair(gs.community_cards[2].rank);
+    			chenValue += h.checkPair(gs.community_cards[3].rank);
+    			
+        		if (chenValue >= 9 && chenValue <= 14){
+        			bet = gs.current_buy_in;
+        		}else if (chenValue >= 14 && chenValue < 20){
+        			bet = gs.current_buy_in + (p.stack/10);
+        		}else if(chenValue >= 20) {
+        			bet = p.stack;
+        		}
+        		
+    		}else if (gs.community_cards.length == 5){
+    			
+    			raised = false;
+    		
+    			chenValue += h.checkPair(gs.community_cards[0].rank);
+    			chenValue += h.checkPair(gs.community_cards[1].rank);
+    			chenValue += h.checkPair(gs.community_cards[2].rank);
+    			chenValue += h.checkPair(gs.community_cards[3].rank);
+    			chenValue += h.checkPair(gs.community_cards[4].rank);
+    			
+        		if (chenValue >= 9 && chenValue <= 14){
+        			bet = gs.current_buy_in;
+        		}else if (chenValue >= 14 && chenValue < 20){
+        			bet = gs.current_buy_in + (p.stack/10);
+        		}else if(chenValue >= 20) {
+        			bet = p.stack;
+        		}
+        		
+    		}else {
     			bet = gs.current_buy_in;
-    		}else if (chenValue >= 10){
-    			bet = gs.current_buy_in + (p.stack/10);
     		}
     		
         return bet;
@@ -147,7 +212,7 @@ class Hand {
 		
 		float value = calcPair(n1, n2);
 		if(isSuited(c1, c2))value += 2;
-		value -= gap(n1,n2) * 0.25;
+		value -= Math.abs(gap(n1,n2)) * 0.25;
 		
 		return Math.round(value);
 		
@@ -182,7 +247,7 @@ return 6;
 	
 	float calcPair(String n1, String n2) {
 		if(isPair(n1,n2)) {
-			return getValue(n1) *2;
+			return getValue(n1) *3;
 		}else return getValue(n1);
 	}
 	
@@ -218,7 +283,17 @@ return 6;
 		
 	}
 
+	public int checkPair(String no1) {
+		
+		if(isPair(no1, n1)) {
+			return 6;
+		}else if(isPair(no1, n2)) {
+			return 6;
+		}else return -1;
 	
+	}
+	
+
 
 }
 	
