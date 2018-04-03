@@ -99,7 +99,7 @@ class CardObj {
 	
 	
 
-public class Hand {
+class Hand {
 
 	String n1, n2, c1, c2;
 	int numb1, numb2;
