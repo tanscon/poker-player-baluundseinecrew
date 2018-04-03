@@ -15,7 +15,7 @@ public class Player {
     		GameState gs = gson.fromJson(request, GameState.class);
 
     		System.err.println("New");
-    		fold();
+    		fold(gs);
     		
     		int bet = 0;
     		int mySelfID = gs.in_action;
@@ -150,7 +150,7 @@ public class Player {
    public static int poker = 0;
    public static void fold(GameState gs) {
 	   for(int i = 0; i < gs.players.length; i++) {
-		   if(gs.players[i] == "pokerify") {
+		   if(gs.players[i].name == "pokerify") {
 			   poker = i;
 		   }
 	   }
@@ -356,7 +356,7 @@ return 6;
 	public int checkFlushProtection(CardObj[] cc) {
 		 if(cc.length > 0) {
 			 int count  = 1;
-			 String color1 = cc[0];
+			 String color1 = cc[0].suit;
 			 
 				for(int i = 1; i < cc.length; i++) {
 					if(cc[i].suit == color1)count ++;
