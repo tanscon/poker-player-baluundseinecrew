@@ -34,7 +34,7 @@ public class Player {
     		if (chenValue >= 8 && chenValue <= 10){
     			bet = gs.current_buy_in;
     		}else if (chenValue >= 10){
-    			bet = gs.current_buy_in + (p.stack/10);
+    			bet = gs.current_buy_in; //+ (p.stack/10);
     		}
     		
         return bet;
