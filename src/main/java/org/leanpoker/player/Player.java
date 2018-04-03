@@ -48,12 +48,12 @@ public class Player {
     		
     		if(gs.community_cards.length == 0) {
         		if (chenValue >= 8 && chenValue <= 10){
-        			bet = gs.current_buy_in;
+        			bet = gs.current_buy_in  - p.bet;
         		}else if (chenValue >= 10 && !raised){
-        			bet = gs.current_buy_in + (p.stack/10);
+        			bet = gs.current_buy_in - p.bet + (p.stack/10);
         			raised = true;
         		}else if (chenValue >= 10){
-        			bet = gs.current_buy_in;
+        			bet = gs.current_buy_in - p.bet;
         		}
         		
         		// All in shutz
@@ -78,9 +78,9 @@ public class Player {
     			chenValue += h.checkFlush(gs.community_cards);
     			chenValue += h.checkStraight(gs.community_cards);
         		if (chenValue >= 9 && chenValue <= 14){
-        			bet = gs.current_buy_in;
+        			bet = gs.current_buy_in  - p.bet;
         		}else if (chenValue >= 14){
-        			bet = gs.current_buy_in + (p.stack/10);
+        			bet = gs.current_buy_in  - p.bet + (p.stack/10);
         		}
         		if(activePlayer(gs) >= 2 && chenValue < playValue + 4) {
         			bet = 0;
@@ -99,9 +99,9 @@ public class Player {
     			chenValue += h.checkFlushProtection(gs.community_cards);
     			
         		if (chenValue >= 9 && chenValue <= 14){
-        			bet = gs.current_buy_in;
+        			bet = gs.current_buy_in - p.bet;
         		}else if (chenValue >= 14 && chenValue < 20){
-        			bet = gs.current_buy_in + (p.stack/10);
+        			bet = gs.current_buy_in - p.bet + (p.stack/10);
         		}else if(chenValue >= 20) {
         			bet = p.stack;
         		}
@@ -121,9 +121,9 @@ public class Player {
     			chenValue += h.checkFlush(gs.community_cards);
     			chenValue += h.checkStraight(gs.community_cards);
         		if (chenValue >= 9 && chenValue <= 14){
-        			bet = gs.current_buy_in;
+        			bet = gs.current_buy_in - p.bet;
         		}else if (chenValue >= 14 && chenValue < 20){
-        			bet = gs.current_buy_in + (p.stack/10);
+        			bet = gs.current_buy_in - p.bet + (p.stack/10);
         		}else if(chenValue >= 20) {
         			bet = p.stack;
         		}
