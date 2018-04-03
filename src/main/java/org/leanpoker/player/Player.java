@@ -45,6 +45,10 @@ public class Player {
         		}else if (chenValue >= 10){
         			bet = gs.current_buy_in;
         		}
+        		
+        		if(gs.current_buy_in >= p.stack && p.stack > 200 && chenValue < 15) {
+        			bet = 0;
+        		}
     		}else if (gs.community_cards.length == 3){
     			
     			raised = false;
@@ -287,6 +291,10 @@ return 6;
 			return 6;
 		}else return -1;
 	
+	}
+	
+	public int checkFlush() {
+		
 	}
 
 }
