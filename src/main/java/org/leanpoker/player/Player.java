@@ -46,7 +46,7 @@ public class Player {
     }
     
     
-    int calcHand(String n1, String c1, String n2, String c2) {
+    public static int calcHand(String n1, String c1, String n2, String c2) {
 		
 		
 		
@@ -61,7 +61,7 @@ public class Player {
 	
     }
 
-float getValue(String n1) {
+    public static float getValue(String n1) {
 	
 	
 	switch (n1) {
@@ -78,23 +78,23 @@ float getValue(String n1) {
 		return Integer.parseInt(number) / 2;
 }
 }	
-	boolean isPair(String n1, String n2) {
+    public static boolean isPair(String n1, String n2) {
 		if(n1.equals(n2))return true;
 		else return false;
 	}
 	
-	float calcPair(String n1, String n2) {
+    public static float calcPair(String n1, String n2) {
 		if(isPair(n1,n2)) {
 			return getValue(n1) *2;
 		}else return getValue(n1);
 	}
 	
-	boolean isSuited(String c1, String c2) {
+    public static boolean isSuited(String c1, String c2) {
 		if(c1.equals(c2))return true;
 		else return false;
 	}
 	
-	int gap(String n1, String n2) {
+    public static int gap(String n1, String n2) {
 		
 		if(n1.equalsIgnoreCase("A")) {
 		 n1 = "14"	;
