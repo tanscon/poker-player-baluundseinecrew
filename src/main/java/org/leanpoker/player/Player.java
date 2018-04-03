@@ -34,7 +34,7 @@ public class Player {
     		if (chenValue >= 6 && chenValue <= 10){
     			bet = gs.current_buy_in;
     		}else if (chenValue >= 10){
-    			bet = gs.current_buy_in; //+ (p.stack/10);
+    			bet = gs.current_buy_in + (p.stack/10);
     		}
     		
         return bet;
@@ -182,7 +182,7 @@ return 6;
 	
 	float calcPair(String n1, String n2) {
 		if(isPair(n1,n2)) {
-			return getValue(n1) *2;
+			return getValue(n1) *3;
 		}else return getValue(n1);
 	}
 	
