@@ -49,9 +49,10 @@ public class Player {
         			bet = gs.current_buy_in;
         		}
         		
-        		if(gs.current_buy_in >= p.stack && p.stack > 200 && chenValue < 15) {
-        			bet = 0;
-        		}
+        		// All in shutz
+        //		if(gs.current_buy_in >= p.stack && p.stack > 200 && chenValue < 15) {
+        //			bet = 0;
+        //		}
         		if(activePlayer(gs) >= 2 && chenValue < 10) {
         			bet = 0;
         		}
