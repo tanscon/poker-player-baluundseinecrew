@@ -56,7 +56,7 @@ public class Player {
         //			bet = 0;
         //		}
         		
-        		if(gs.players[poker].stack == 0 && gs.players[poker].status != "out" && shenValue < 12) {
+        		if(gs.players[poker].stack == 0 && gs.players[poker].status != "out" && chenValue < 12) {
         			bet = 0;
         		}
         		if(activePlayer(gs) > 2 && chenValue < playValue) {
