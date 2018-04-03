@@ -37,7 +37,9 @@ public class Player {
     		System.err.println(gs.round);
     	//	System.err.println(chenValue);
     		
-    
+    		int playValue = 10;
+    		if(activePlayer(gs) <= 3)
+    			playValue = 8;
     		
     		if(gs.community_cards.length == 0) {
         		if (chenValue >= 6 && chenValue <= 10){
@@ -53,7 +55,7 @@ public class Player {
         //		if(gs.current_buy_in >= p.stack && p.stack > 200 && chenValue < 15) {
         //			bet = 0;
         //		}
-        		if(activePlayer(gs) >= 2 && chenValue < 10) {
+        		if(activePlayer(gs) > 2 && chenValue < playValue) {
         			bet = 0;
         		}
         		
@@ -71,7 +73,7 @@ public class Player {
         		}else if (chenValue >= 14){
         			bet = gs.current_buy_in + (p.stack/10);
         		}
-        		if(activePlayer(gs) >= 2 && chenValue < 14) {
+        		if(activePlayer(gs) >= 2 && chenValue < playValue + 4) {
         			bet = 0;
         		}
         		
@@ -92,7 +94,7 @@ public class Player {
         		}else if(chenValue >= 20) {
         			bet = p.stack;
         		}
-        		if(activePlayer(gs) >= 2 && chenValue < 13) {
+        		if(activePlayer(gs) > 2 && chenValue < playValue + 3) {
         			bet = 0;
         		}
         		
@@ -114,7 +116,7 @@ public class Player {
         		}else if(chenValue >= 20) {
         			bet = p.stack;
         		}
-        		if(activePlayer(gs) >= 2 && chenValue < 12) {
+        		if(activePlayer(gs) > 2 && chenValue < playValue + 2) {
         			bet = 0;
         		}
         		
