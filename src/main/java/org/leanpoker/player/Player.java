@@ -30,16 +30,17 @@ public class Player {
     		
     		int chenValue;
     		chenValue = h.getValue();
+    		System.err.println("Round:");
     		System.err.println(gs.round);
     	//	System.err.println(chenValue);
-    		if(gs.round == 0) {
+    		if(gs.round >= 0) {
         		if (chenValue >= 6 && chenValue <= 10){
         			bet = gs.current_buy_in;
         		}else if (chenValue >= 10){
         			bet = gs.current_buy_in + (p.stack/10);
         		}
     		}else if (gs.round == 1){
-    			
+    		/*	
     			chenValue += h.checkPair(gs.community_cards[0].rank);
     			chenValue += h.checkPair(gs.community_cards[1].rank);
     			chenValue += h.checkPair(gs.community_cards[2].rank);
@@ -49,6 +50,7 @@ public class Player {
         		}else if (chenValue >= 14){
         			bet = gs.current_buy_in + (p.stack/10);
         		}
+        		*/
     		}else if (gs.round == 2){
     		/*	
     			chenValue += h.checkPair(gs.community_cards[0].rank);
