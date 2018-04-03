@@ -31,7 +31,7 @@ public class Player {
     		int chenValue;
     		chenValue = h.getValue();
     		System.err.println(chenValue);
-    		if (chenValue >= 8 && chenValue <= 10){
+    		if (chenValue >= 6 && chenValue <= 10){
     			bet = gs.current_buy_in;
     		}else if (chenValue >= 10){
     			bet = gs.current_buy_in; //+ (p.stack/10);
