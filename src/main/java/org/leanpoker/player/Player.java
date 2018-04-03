@@ -9,7 +9,7 @@ import java.util.Map;
 public class Player {
 
     static final String VERSION = "PDPS3_01";
-
+	static boolean raised = false; 
     public static int betRequest(JsonElement request) {
     		Gson gson = new Gson();
     		GameState gs = gson.fromJson(request, GameState.class);
@@ -34,7 +34,7 @@ public class Player {
     		System.err.println(gs.round);
     	//	System.err.println(chenValue);
     		
-    		boolean raised = false; 
+    
     		
     		if(gs.community_cards.length == 0) {
         		if (chenValue >= 6 && chenValue <= 10){
@@ -242,11 +242,12 @@ return 6;
 	}
 
 	public int checkPair(String no1) {
+		
 		if(isPair(no1, n1)) {
-			return 4;
-		}if(isPair(no1, n2)) {
-			return 4;
-		}else return 0;
+			return 6;
+		}else if(isPair(no1, n2)) {
+			return 6;
+		}else return -1;
 	
 	}
 
