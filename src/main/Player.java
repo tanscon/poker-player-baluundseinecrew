@@ -14,6 +14,9 @@ public class Player {
     		Gson gson = new Gson();
     		GameState gs = gson.fromJson(request, GameState.class);
 
+    		System.err.println("New");
+    		fold(gs);
+    		
     		int bet = 0;
     		int mySelfID = gs.in_action;
     		
@@ -34,7 +37,9 @@ public class Player {
     		System.err.println(gs.round);
     	//	System.err.println(chenValue);
     		
-    
+    		int playValue = 10;
+    		if(activePlayer(gs) <= 3)
+    			playValue = 8;
     		
     		if(gs.community_cards.length == 0) {
         		if (chenValue >= 6 && chenValue <= 10){
@@ -46,10 +51,15 @@ public class Player {
         			bet = gs.current_buy_in;
         		}
         		
-        		if(gs.current_buy_in >= p.stack && p.stack > 200 && chenValue < 15) {
+        		// All in shutz
+        //		if(gs.current_buy_in >= p.stack && p.stack > 200 && chenValue < 15) {
+        //			bet = 0;
+        //		}
+        		
+        		if(gs.players[poker].stack == 0 && gs.players[poker].status != "out" && chenValue < 12) {
         			bet = 0;
         		}
-        		if(activePlayer(gs) >= 2 && chenValue < 14) {
+        		if(activePlayer(gs) > 2 && chenValue < playValue) {
         			bet = 0;
         		}
         		
@@ -67,7 +77,7 @@ public class Player {
         		}else if (chenValue >= 14){
         			bet = gs.current_buy_in + (p.stack/10);
         		}
-        		if(activePlayer(gs) >= 2 && chenValue < 20) {
+        		if(activePlayer(gs) >= 2 && chenValue < playValue + 4) {
         			bet = 0;
         		}
         		
@@ -81,6 +91,8 @@ public class Player {
     			chenValue += h.checkPair(gs.community_cards[3].rank);
     			chenValue += h.checkFlush(gs.community_cards);
     			chenValue += h.checkStraight(gs.community_cards);
+    			chenValue += h.checkFlushProtection(gs.community_cards);
+    			
         		if (chenValue >= 9 && chenValue <= 14){
         			bet = gs.current_buy_in;
         		}else if (chenValue >= 14 && chenValue < 20){
@@ -88,7 +100,7 @@ public class Player {
         		}else if(chenValue >= 20) {
         			bet = p.stack;
         		}
-        		if(activePlayer(gs) >= 2 && chenValue < 20) {
+        		if(activePlayer(gs) > 2 && chenValue < playValue + 3) {
         			bet = 0;
         		}
         		
@@ -110,7 +122,7 @@ public class Player {
         		}else if(chenValue >= 20) {
         			bet = p.stack;
         		}
-        		if(activePlayer(gs) >= 2 && chenValue < 20) {
+        		if(activePlayer(gs) > 2 && chenValue < playValue + 2) {
         			bet = 0;
         		}
         		
@@ -134,6 +146,15 @@ public class Player {
     	}
     	return gs.players.length - count;
     }
+   
+   public static int poker = 0;
+   public static void fold(GameState gs) {
+	   for(int i = 0; i < gs.players.length; i++) {
+		   if(gs.players[i].name == "pokerify") {
+			   poker = i;
+		   }
+	   }
+   }
   
 }
 
@@ -330,6 +351,26 @@ return 6;
 		if(oCo >= 5)return 20;
 		else if(tCo >= 5)return 20;
 		else return 0;
+	}
+	
+	public int checkFlushProtection(CardObj[] cc) {
+		 if(cc.length > 0) {
+			 int count  = 1;
+			 String color1 = cc[0].suit;
+			 
+				for(int i = 1; i < cc.length; i++) {
+					if(cc[i].suit == color1)count ++;
+
+				}
+				
+				if(count >= 4)return -10;
+				else return 0;
+		 }else {
+			 return 0;
+		 }
+
+		
+
 	}
 	
 	public int checkStraight(CardObj[] cc) {
