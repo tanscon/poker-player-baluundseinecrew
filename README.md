@@ -1,3 +1,5 @@
+This Repo was created during a hackathon so be aware bad code
+
 poker-player-java
 =================
 
